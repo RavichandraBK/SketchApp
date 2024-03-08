@@ -16,6 +16,7 @@ import {
 import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ACTIONS } from "./constants";
+import Sketch from "../apis/SketchAPI";
 
 export default function SketchEditor() {
   const stageRef = useRef();
@@ -32,6 +33,18 @@ export default function SketchEditor() {
   const transformerRef = useRef();
 
   const isDraggable = action === ACTIONS.SELECT;
+
+  const handleSave = async () => {
+    try {
+        const sketchSave = await Sketch({ rectangles, circles, arrows, scribbles });
+        if (sketchSave) {
+            // Handle success
+        }
+    } catch (error) {
+        console.error('Error while saving sketch:', error);
+        // Handle error
+    }
+}
 
   function onPointerDown() {
     if (action === ACTIONS.SELECT || action === ACTIONS.ERASER) return;
@@ -282,6 +295,7 @@ export default function SketchEditor() {
             >
               <FaEraser size={"1.5rem"} />
             </button>
+            <button className="bg-blue-600 rounded-md flex items-center text-center font-mono" onClick={handleSave}>Save Sketch</button>
           </div>
         </div>
         {/* Canvas */}
@@ -370,6 +384,7 @@ export default function SketchEditor() {
             <Transformer ref={transformerRef} />
           </Layer>
         </Stage>
+          
       </div>
     </>
   );
