@@ -297,7 +297,7 @@ export default function SketchEditor() {
             >
               <FaEraser size={"1.5rem"} />
             </button>
-            <button className="bg-blue-600 rounded-md flex items-center text-center font-mono" onClick={handleSave}>Save Sketch</button>
+            <button className="bg-blue-600 text-white  rounded-md max-h-8 p-1 max-w-screen-lg flex items-center justify-center font-bold" onClick={handleSave}>Save Sketch</button>
           </div>
         </div>
         {/* Canvas */}
