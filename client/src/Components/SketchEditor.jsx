@@ -4,6 +4,7 @@ import { FaLongArrowAltRight, FaEraser } from "react-icons/fa";
 import { LuPencil } from "react-icons/lu";
 import { GiArrowCursor } from "react-icons/gi";
 import { FaRegCircle } from "react-icons/fa6";
+
 import {
   Arrow,
   Circle,
@@ -17,6 +18,7 @@ import { useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ACTIONS } from "./constants";
 import Sketch from "../apis/SketchAPI";
+import { toast } from "react-toastify";
 
 export default function SketchEditor() {
   const stageRef = useRef();
@@ -37,12 +39,12 @@ export default function SketchEditor() {
   const handleSave = async () => {
     try {
         const sketchSave = await Sketch({ rectangles, circles, arrows, scribbles });
+        
         if (sketchSave) {
-            // Handle success
+           toast('Sketch saved to DB')
         }
     } catch (error) {
         console.error('Error while saving sketch:', error);
-        // Handle error
     }
 }
 
